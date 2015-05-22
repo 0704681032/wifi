@@ -1,0 +1,18 @@
+{
+  "id": "d6e608bcbe5344d4b5135f710ed65fb9", "seatbid": [
+  {
+    "bid": [
+      {
+        "impid": "483ceb489810452187f72667509b7b0d",
+        "price": 20000,
+        "adid": "234", "nurl":"http://www.example.com/win_notice?id=d6e608bcbe5344d4 b5135f710ed65fb9p=#WIN_PRICE#",
+        "adm": "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /><style type='text/css'>*{padding:0px;margin:0px;} a:link{text- decoration:none;}</style><a href='#CLICK_URL#'><img width='100%' height='100%' src='http://my.adsmogo.com/Uplaod/AdContent/a588cc47-181c- 4def-90e0- 9cf94bf286a9_320x50.png'></img></a>#IMP_TRACK#",
+        "cid": "111",
+        "crid": "112",
+        "curl": "http://www.adsmogo.com",
+        "cturl": ["http://www.example.com/c?id=1234567&o="],
+        "attr": [ "4"],
+        "ctype": 3
+      } ],
+    "seat": "512" }
+] }

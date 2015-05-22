@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+	<property name="SERVER_NAME" value="CpmLogicServer-twin0859" />
+	<include resource="logback-included.xml" />
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<Target>System.out</Target>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{HH:mm:ss}|%40.40(%c{30}.%-5M)|%-5.5p %m \(%file:%line\)
+				%-5(%thread)%n%xEx</Pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+	</appender>
+
+	<appender name="rolling_file"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>logs/logFile.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{mm:ss}|%m%n</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="running"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>logs/CPMServerRunning-%d{yyyy-MM-dd-HH}.stat
+			</FileNamePattern>
+			<MaxHistory>168</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%m%n</Pattern>
+		</layout>
+	</appender>
+
+    <appender name="count"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>logs/COUNT-%d{yyyy-MM-dd-HH}.stat
+            </FileNamePattern>
+            <MaxHistory>168</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%m%n</Pattern>
+        </layout>
+    </appender>
+	
+	
+	<!--全局设置 -->
+	<logger name="httpclient.wire" level="INFO" />
+	<logger name="net.rubyeye.xmemcached" level="WARN" />
+	<logger name="com.google.code.yanf4j" level="WARN" />
+	<logger name="org.quartz" level="WARN" />
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.apache.mina" level="INFO" />
+	<logger name="org.apache.http" level="INFO" />
+	<logger name="org.apache.commons.beanutils" level="WARN" />
+	<logger name="org.apache.commons.httpclient" level="INFO" />
+	<logger name="com.mchange" level="WARN" />
+	<logger name="com.xunlei.jdbc.typematcher" level="OFF" />
+	<logger name="com.xunlei.jdbc" level="INFO" />
+	<logger name="com.xunlei.memcached" level="INFO" />
+
+    <logger name="com.wifi.running" level="debug" additivity="false">
+        <appender-ref ref="running" />
+    </logger>
+
+    <logger name="com.wifi.count" level="debug" additivity="false">
+        <appender-ref ref="count" />
+    </logger>
+
+	<root level="warn">
+		<appender-ref ref="rolling_file" />
+	</root>
+</configuration>
