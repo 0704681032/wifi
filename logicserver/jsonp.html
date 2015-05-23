@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FE test </title>
+  <link rel="stylesheet" href="css/prettyjson.css">
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="js/prettyjson.js"></script>
+  <script type="text/javascript">
+    ////模拟wifi请求接口
+    var data = {
+      "id": +new Date() + "jyy",
+      "client": {
+          "caller": "device",
+          "ver": "4",
+          "uuid": "sdfafhuhsadhf",
+          "ex": {
+              "model": "ddd",
+              "cv": "673"
+          }
+      }
+    };
+     
+     $(function(){
+
+        // $.get("http://localhost:9090/adlistrequest").done(function(data){
+        //     console.log(data);
+        // });
+
+        var deferred = $.Deferred();
+
+        //测试wifi升级接口
+        $.ajax({
+          type : "post",
+          url : "http://localhost:9090/wifirequest",
+          dataType : "jsonp",
+          data : {
+            "data":JSON.stringify(data)
+          },
+        }).done(function(data){
+            //console.log(JSON.stringify(data,null,'\t'));
+            $('#content').html(library.json.prettyPrint(data));
+            deferred.resolve();//测试第二个接口
+        });
+
+
+        // var planets = [{ name: 'Earth', order: 3, stats: { life: true, mass: 5.9736 * Math.pow(10, 24) } }, { name: 'Saturn', order: 6, stats: { life: null, mass: 568.46 * Math.pow(10, 24) } }];
+
+        //$('#content').html(library.json.prettyPrint(planets));
+
+         //console.log(JSON.stringify(planets));
+
+         function testCount() {
+
+            //注意第一个参数
+            var data1 = $.extend(true,{},data,{
+              client: {
+                ex: {
+                  //sid: "100",
+                  //smsg: "请求配置文件失败"
+                  sid: "300",
+                  smsg: "替换执行成功!"
+                }
+              }
+            });
+
+            console.log(JSON.stringify(data,null,'\t'));
+
+            console.log(JSON.stringify(data1,null,'\t'));
+
+             //测试wifi升级接口
+            $.ajax({
+              type : "post",
+              url : "http://localhost:9090/wificount",
+              dataType : "jsonp",
+              data : {
+                "data":JSON.stringify(data1)
+              },
+            });
+
+
+         }
+
+         deferred.done(testCount);
+
+     })
+
+  </script>
+</head>
+<body>
+
+<pre><code id="content"></code></pre>
+ 
+</body>
+</html>
